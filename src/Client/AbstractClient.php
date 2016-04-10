@@ -40,16 +40,15 @@ abstract class AbstractClient
             throw new \RuntimeException('Connection has already been opened and must be closed');
         if(!array_key_exists($environment, $this->uris))
             throw new \InvalidArgumentException('Environment must be one of PRODUCTION_URI or SANDBOX_URI');
-        if(!is_string($certificate) || is_file($certificate))
-            throw new \InvalidArgumentException('Environment must be one of PRODUCTION_URI or SANDBOX_URI');
+        if(!is_string($certificate) || !is_file($certificate))
+            throw new \InvalidArgumentException('Certificate must be a valid path to a APNS certificate');
 
-        $sslOptions = array(
+        $sslOptions = [
             'local_cert' => $certificate,
-        );
+        ];
         if ($passPhrase !== null) {
-            if (!is_scalar($passPhrase)) {
-                throw new InvalidArgumentException('SSL passphrase must be a scalar');
-            }
+            if (!is_scalar($passPhrase))
+                throw new \InvalidArgumentException('SSL passphrase must be a scalar');
             $sslOptions['passphrase'] = $passPhrase;
         }
         $this->connect($this->uris[$environment], $sslOptions);
@@ -131,9 +130,8 @@ abstract class AbstractClient
      */
     protected function read($length = 6)
     {
-        if (!$this->isConnected()) {
+        if (!$this->isConnected())
             throw new \RuntimeException('You must open the connection prior to reading data');
-        }
         $data = false;
         $read = [$this->socket];
         $null = null;
@@ -150,9 +148,8 @@ abstract class AbstractClient
      */
     protected function write($payload)
     {
-        if (!$this->isConnected()) {
+        if (!$this->isConnected())
             throw new \RuntimeException('You must open the connection prior to writing data');
-        }
         return @fwrite($this->socket, $payload);
     }
 

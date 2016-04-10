@@ -103,9 +103,8 @@ class Alert
      */
     public function setBody($body)
     {
-        if (!is_null($body) && !is_scalar($body)) {
+        if (!is_null($body) && !is_scalar($body))
             throw new \InvalidArgumentException('Body must be null OR a scalar value');
-        }
         $this->body = $body;
         return $this;
     }
@@ -128,9 +127,8 @@ class Alert
      */
     public function setActionLocKey($key)
     {
-        if (!is_null($key) && !is_scalar($key)) {
+        if (!is_null($key) && !is_scalar($key))
             throw new \InvalidArgumentException('ActionLocKey must be null OR a scalar value');
-        }
         $this->actionLocKey = $key;
         return $this;
     }
@@ -153,9 +151,8 @@ class Alert
      */
     public function setLocKey($key)
     {
-        if (!is_null($key) && !is_scalar($key)) {
+        if (!is_null($key) && !is_scalar($key))
             throw new \InvalidArgumentException('LocKey must be null OR a scalar value');
-        }
         $this->locKey = $key;
         return $this;
     }
@@ -205,9 +202,8 @@ class Alert
      */
     public function setLaunchImage($image)
     {
-        if (!is_null($image) && !is_scalar($image)) {
+        if (!is_null($image) && !is_scalar($image))
             throw new \InvalidArgumentException('Launch image must be null OR a scalar value');
-        }
         $this->launchImage =  $image;
         return $this;
     }
@@ -230,9 +226,8 @@ class Alert
      */
     public function setTitle($title)
     {
-        if (!is_null($title) && !is_scalar($title)) {
+        if (!is_null($title) && !is_scalar($title))
             throw new \InvalidArgumentException('Title must be null OR a scalar value');
-        }
         $this->title = $title;
         return $this;
     }
@@ -255,9 +250,8 @@ class Alert
      */
     public function setTitleLocKey($key)
     {
-        if (!is_null($key) && !is_scalar($key)) {
+        if (!is_null($key) && !is_scalar($key))
             throw new \InvalidArgumentException('TitleLocKey must be null OR a scalar value');
-        }
         $this->titleLocKey = $key;
         return $this;
     }

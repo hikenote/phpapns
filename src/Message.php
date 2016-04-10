@@ -67,9 +67,8 @@ class Message
      */
     public function setId($id)
     {
-        if (!is_scalar($id)) {
+        if (!is_scalar($id))
             throw new \InvalidArgumentException('Identifier must be a scalar value');
-        }
         $this->id = $id;
         return $this;
     }
@@ -160,9 +159,8 @@ class Message
      */
     public function setAlert($alert)
     {
-        if (!$alert instanceof Message\Alert && !is_null($alert)) {
+        if (!$alert instanceof Message\Alert && !is_null($alert))
             $alert = new Message\Alert($alert);
-        }
         $this->alert = $alert;
         return $this;
     }
@@ -185,9 +183,8 @@ class Message
      */
     public function setBadge($badge)
     {
-        if ($badge !== null && !$badge == (int) $badge) {
+        if ($badge !== null && !$badge == (int) $badge)
             throw new \InvalidArgumentException('Badge must be null or an integer');
-        }
         $this->badge = $badge;
         return $this;
     }
@@ -210,9 +207,8 @@ class Message
      */
     public function setSound($sound)
     {
-        if ($sound !== null && !is_string($sound)) {
+        if ($sound !== null && !is_string($sound))
             throw new \InvalidArgumentException('Sound must be null or a string');
-        }
         $this->sound = $sound;
         return $this;
     }
@@ -235,9 +231,8 @@ class Message
      */
     public function setContentAvailable($value)
     {
-        if ($value !== null && !is_int($value)) {
+        if ($value !== null && !is_int($value))
             throw new \InvalidArgumentException('Content Available must be null or an integer');
-        }
         $this->contentAvailable = $value;
         return $this;
     }
@@ -260,9 +255,8 @@ class Message
      */
     public function setCategory($category)
     {
-        if ($category !== null && !is_string($category)) {
+        if ($category !== null && !is_string($category))
             throw new \InvalidArgumentException('Category must be null or a string');
-        }
         $this->category = $category;
         return $this;
     }
@@ -285,9 +279,8 @@ class Message
      */
     public function setCustom(array $custom)
     {
-        if (array_key_exists('aps', $custom)) {
+        if (array_key_exists('aps', $custom))
             throw new \RuntimeException('custom data must not contain aps key as it is reserved by apple');
-        }
         $this->custom = $custom;
         return $this;
     }
@@ -333,9 +326,7 @@ class Message
      */
     public function getPayloadJson()
     {
-        $payload = $this->getPayload();
-        // don't escape utf8 payloads unless json_encode does not exist.
-        $payload = json_encode($payload, JSON_UNESCAPED_UNICODE);
+        $payload = json_encode($this->getPayload(), JSON_UNESCAPED_UNICODE);
         $length = strlen($payload);
         return pack('CNNnH*', 1, $this->id, $this->expire, 32, $this->token)
         . pack('n', $length)

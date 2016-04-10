@@ -62,9 +62,8 @@ class Message
      */
     public function setCode($code)
     {
-        if (($code < 0 || $code > 8) && $code != 10 && $code != 128 && $code != 255) {
+        if (($code < 0 || $code > 8) && $code != 10 && $code != 128 && $code != 255)
             throw new \InvalidArgumentException('Code must be between 0-8 OR 255');
-        }
         $this->code = $code;
         return $this;
     }
@@ -87,9 +86,8 @@ class Message
      */
     public function setId($id)
     {
-        if (!is_scalar($id)) {
+        if (!is_scalar($id))
             throw new \InvalidArgumentException('Identifier must be a scalar value');
-        }
         $this->id = $id;
         return $this;
     }
@@ -102,9 +100,8 @@ class Message
      */
     public function parseRawResponse($rawResponse)
     {
-        if (!is_scalar($rawResponse)) {
+        if (!is_scalar($rawResponse))
             throw new \InvalidArgumentException('Response must be a scalar value');
-        }
         if (strlen($rawResponse) === 0) {
             $this->code = self::RESULT_OK;
             return $this;

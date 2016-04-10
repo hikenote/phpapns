@@ -36,9 +36,8 @@ class Message extends AbstractClient
      * @return MessageResponse
      */
     public function getResponse(){
-        if (!$this->isConnected()) {
+        if (!$this->isConnected())
             throw new \RuntimeException('You must first open the connection by calling open()');
-        }
         return new MessageResponse($this->read());
     }
 }
