@@ -29,4 +29,16 @@ class Message extends AbstractClient
             throw new \RuntimeException('Server is unavailable; please retry later');
         return new MessageResponse($this->read());
     }
+
+    /**
+     * Get Response
+     *
+     * @return MessageResponse
+     */
+    public function getResponse(){
+        if (!$this->isConnected()) {
+            throw new \RuntimeException('You must first open the connection by calling open()');
+        }
+        return new MessageResponse($this->read());
+    }
 }

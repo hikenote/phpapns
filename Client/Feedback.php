@@ -25,7 +25,8 @@ class Feedback extends AbstractClient
 
         $tokens = [];
         while($token = $this->read(38))
-            $tokens[] = new FeedbackResponse($token);
+            if(strlen($token) == 38)
+                $tokens[] = new FeedbackResponse($token);
         return $tokens;
     }
 }
