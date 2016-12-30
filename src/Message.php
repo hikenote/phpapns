@@ -24,6 +24,11 @@ class Message
      */
     protected $alert;
     /**
+     * mutable-content ios10 added
+     * @var int|null
+     */
+    protected $mutableContent;
+    /**
      * Badge
      * @var int|null
      */
@@ -166,6 +171,28 @@ class Message
     }
 
     /**
+     * Get mutable-content
+     * @return int|null $mutableContent
+     */
+    public function getMutableContent()
+    {
+        return $this->mutableContent;
+    }
+
+    /**
+     * Set mutable-content
+     * param int|null $mutableContent
+     * @return Message
+     */
+    public function setMutableContent($mutableContent)
+    {
+        if ($mutableContent !== null && !$mutableContent == (int) $mutableContent)
+            throw new \InvalidArgumentException('mutable-content must be null or an integer');
+        $this->mutableContent = $mutableContent;
+        return $this;
+    }
+
+    /**
      * Get Badge
      *
      * @return int|null
@@ -297,6 +324,9 @@ class Message
         $aps = array();
         if ($this->alert && ($alert = $this->alert->getPayload())) {
             $aps['alert'] = $alert;
+        }
+        if (!is_null($this->mutableContent)) {
+            $aps['mutable-content'] = $this->mutableContent;
         }
         if (!is_null($this->badge)) {
             $aps['badge'] = $this->badge;
